@@ -6,7 +6,7 @@
   --neutral-mood: #EAB308;
   --negative-mood: #EF4444;
   --text-color: #b4b4b4;
-  --text-color-light:#000000;
+  --text-color-light: #000000;
   --text-color-dark: #ffffff;
   
 
@@ -74,7 +74,8 @@ header{
 }
 
 #app {
-  border: 1px solid black;
+  min-height: 90vh;
+  padding: 20px 30px;
 }
 
 #footer{
@@ -83,4 +84,6 @@ header{
   color: var(--text-color);
   font-family: var(--body-text)
 }
+
+
 

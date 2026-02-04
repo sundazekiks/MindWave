@@ -10,11 +10,6 @@ export const footer = async (path) => {
     return html
 }
 
-export const dashboard = async (path) => {
-    const data = await fetch(path)
-    const html = await data.text()
-    return html
-}
 
 export const getParams = () => {
     const url = window.location.search

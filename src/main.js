@@ -1,10 +1,10 @@
 import "./styles/style.css"
-import "./styles/dasboard.css"
-import "./styles/settings.css"
-import "./styles/mood-history.css"
+import "./styles/dashboard.css"
 
-import { footer, header, getParams } from "./controllers/utils";
-import { Page } from "./controllers/page";
+import { footer, header } from "./controllers/utils";
+import { Dashboard } from "./modules/dashboard";
+
+
 // Main Content
 const app = document.getElementById("app")
 
@@ -20,15 +20,20 @@ document.querySelector('#footer').innerHTML = htmlFooter;
 
 // Embedding the pages
 
-const get = getParams();
-const page = new Page(get, app)
+// const get = getParams();
+const d = new Dashboard(app)
 
-page.init()
+d.Quote()
 
-setTimeout(() => {
-    console.log("hey there!")
-    page.onMount(document.querySelector(".db-container"))
-}, 5000)
+
+
+
+
+
+
+
+
+
 
 
 
