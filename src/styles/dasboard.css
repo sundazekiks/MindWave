@@ -1,0 +1,9 @@
+.db-container{
+    min-height: 75vh;
+}
+
+.db-container h1 {
+    font-family: var(--heading-1);
+    font-size:
+    color: var(--text-color-light)
+}
