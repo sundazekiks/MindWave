@@ -1,10 +1,8 @@
 import "./styles/style.css"
 import "./styles/dashboard.css"
 
-import { footer, header } from "./controllers/utils";
+import { footer, header, getParams } from "./controllers/utils";
 import { Dashboard } from "./modules/dashboard";
-
-
 // Main Content
 const app = document.getElementById("app")
 
@@ -20,10 +18,15 @@ document.querySelector('#footer').innerHTML = htmlFooter;
 
 // Embedding the pages
 
-// const get = getParams();
-const d = new Dashboard(app)
+const get = getParams();
 
-d.Quote()
+
+if (get === "dashboard" || get === "redirect to dashboard") {
+    const d = new Dashboard(app)
+    d.Init()
+}
+
+
 
 
 

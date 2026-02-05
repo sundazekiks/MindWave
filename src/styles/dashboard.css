@@ -1,11 +1,11 @@
-.quote-card {
-    padding: 20px 40px;
+.input-card {
+    padding: 40px 60px;
     width: fit-content;
-    box-shadow: var(--bg-custom) 1.95px 1.95px 2.6px;
+    box-shadow: var(--shadow-custom);
     border-radius: 25px;
 }
 
-.quote-card > * {
+.input-card > * {
     margin: 20px 0;
 }
 
@@ -26,7 +26,7 @@
 }
 
 
-.quote-card h1, p {
+.input-card h1, p {
     margin: 20px 0;
 }
 
@@ -34,8 +34,96 @@
     width: 50px;
 }
 
+.input-card h1 {
+    font-family: var(--heading-1);
+    color: var(--text-color-light)
+}
+
+.input-card p {
+    font-family: var(--heading-2);
+    color: var(--text-color-light)
+}
+
+#note {
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+    vertical-align: baseline;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    border-radius: 0;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #8d8d8d;
+    background-color: #f4f4f4;
+    padding: 0 16px;
+    color: #161616;
+    transition: background-color 70ms cubic-bezier(.2,0,.38,.9),outline 70ms cubic-bezier(.2,0,.38,.9);  
+    :focus{
+        outline: 2px solid #0f62fe;
+        outline-offset: -2px;
+    }    
+}
+
+#note::placeholder{
+    font-style: italic;
+    font-family: var(--body-text2)
+}
+
+/* the Container for Input and Chart Card */
+
+.bottom-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 30px;
+    height: fit-content;
+}
+
+/*  Container for the Quote Card and Them Changer */
+.top-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 30px;
+    height: fit-content;
+    /* border: 1px solid black; */
+}
+
+/* The Chart Card */
+
+.chart-card {
+    padding: 20px 40px;
+    width: fit-content;
+    box-shadow: var(--shadow-custom);
+    border-radius: 25px;
+    flex: 1;
+}
+
+.chart-card h1 {
+    font-family: var(--heading-1);
+    color: var(--text-color-light)
+}
+
+.chart-card p {
+    font-family: var(--heading-2);
+    color: var(--text-color-light)
+}
+
+/* Quote Card */
+
+.quote-card {
+    padding: 40px 50px;
+    width: fit-content;
+    box-shadow: var(--shadow-custom);
+    border-radius: 25px;
+}
+
 .quote-card h1 {
     font-family: var(--heading-1);
+    font-size: 22px;
     color: var(--text-color-light)
 }
 
