@@ -3,6 +3,14 @@ import { card } from "../controllers/inputCard";
 import { chartCard } from "../controllers/chartCard";
 import { Card } from "../controllers/quoteCard";
 import { getLocalStorage } from "../controllers/utils";
+
+const tempQuotes = `
+    Breathe in, breathe out, Let the storm pass through, Even the darkest clouds Can’t hide the sky so blue.
+    Small steps count, No need to race, Healing takes its time, And you’ll find your pace.
+    When the night feels heavy, And your mind won’t rest, Remember: even shadows Need the sun to crest.
+    A whisper of hope Can start a roaring flame, Kindness to yourself Is never done in vain.
+    Sit with your feelings, Let them flow and be, You are not broken, You are simply free.
+`
 export class Dashboard extends Page {
 
     bottomCardsContainer;
@@ -31,7 +39,7 @@ export class Dashboard extends Page {
     }
 
     getQuote() {
-        const quotes = getLocalStorage("quotes")
+        const quotes = getLocalStorage("quotes") || tempQuotes;
         const quoteArray = quotes.split(".")
         let randInt = Math.floor(Math.random() * quoteArray.length)
         console.log(randInt)
