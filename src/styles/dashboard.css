@@ -11,8 +11,26 @@
 
 .emojis {
     display: flex;
-    gap: 10px;
     margin: 30px 0;
+    border: none;
+    padding: 0;
+}
+
+
+.emojis label {
+  font-size: 40px;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.2s ease;
+}
+
+.emojis input[type="radio"] {
+  display: none;
+}
+
+.emojis input[type="radio"]:checked + label {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 5px gold);
 }
 
 .emojis a {
@@ -81,6 +99,7 @@
     gap: 20px;
     padding: 20px 30px;
     height: fit-content;
+    flex-wrap: wrap;
 }
 
 /*  Container for the Quote Card and Them Changer */
@@ -123,11 +142,23 @@
 
 .quote-card h1 {
     font-family: var(--heading-1);
-    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 20px;
     color: var(--text-color-light)
 }
 
 .quote-card p {
     font-family: var(--heading-2);
     color: var(--text-color-light)
+}
+
+#submit-mood {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--heading-2);
 }

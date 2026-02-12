@@ -1,24 +1,30 @@
 
-const emojiArray = [
-    { name: "Happy", icon: "/images/emoji-icons/happy-face.png" },
-    { name: "Smile", icon: "/images/emoji-icons/smile.png" },
-    { name: "Confused", icon: "/images/emoji-icons/confused.png" },
-    { name: "Sad", icon: "/images/emoji-icons/sad.png" },
-    { name: "Angry", icon: "/images/emoji-icons/angry.png" },
+export const emojiArray = [
+    { name: "happy", icon: "/images/emoji-icons/happy.png" },
+    { name: "smile", icon: "/images/emoji-icons/smile.png" },
+    { name: "confused", icon: "/images/emoji-icons/confused.png" },
+    { name: "sad", icon: "/images/emoji-icons/sad.png" },
+    { name: "angry", icon: "/images/emoji-icons/angry.png" },
 ]
 
 export const card = `
-      <h1>Action Center</h1>
-      <p>How are you feeling right now?</p>
-      <div class="emojis">
+    <h1>Action Center</h1>
+    <p>How are you feeling right now?</p>
+    <form id="mood-form">
+    <fieldset class="emojis">
         ${emojiArray
         .map(
             (item) => ` 
-                <a data-name="${item.name}" class="icon-select">
-                    <img src="${item.icon}" alt="${item.name}"/>
-                </a>
+                <input type="radio" id="${item.name}" name="mood" value="${item.name}" placeholder="${item.name}" />
+                <label for="${item.name}">
+                    <img src="${item.icon}" alt="${item.name}" title="${item.name}" />
+                </label>
             `
         ).join("")}
-      </div>
+    </fieldset>
+    <fieldset class="emojis">
       <input id="note" type="text" placeholder="Record what you feel">
+    </fieldset>
+    <button type="submit" id="submit-mood">Submit</button>
+    </form>
 `

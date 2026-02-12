@@ -1,7 +1,8 @@
 import { Page } from "../controllers/page";
 import { card } from "../controllers/inputCard";
 import { chartCard } from "../controllers/chartCard";
-import { quoteCard } from "../controllers/quoteCard";
+import { Card } from "../controllers/quoteCard";
+import { getLocalStorage } from "../controllers/utils";
 export class Dashboard extends Page {
 
     bottomCardsContainer;
@@ -29,6 +30,14 @@ export class Dashboard extends Page {
         this.Chart();
     }
 
+    getQuote() {
+        const quotes = getLocalStorage("quotes")
+        const quoteArray = quotes.split(".")
+        let randInt = Math.floor(Math.random() * quoteArray.length)
+        console.log(randInt)
+        return quoteArray[randInt]
+    }
+
     // TODO: Generate Card- Input
 
     Input() {
@@ -45,7 +54,8 @@ export class Dashboard extends Page {
 
     // TODO: Generate Card- Quote 
     Quote() {
-        const cardHtml = quoteCard;
+        const quote = this.getQuote()
+        const cardHtml = Card(quote);
         const cardContainer = document.createElement("div")
         cardContainer.classList.add("quote-card");
         cardContainer.innerHTML = cardHtml;
