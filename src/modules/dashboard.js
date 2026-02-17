@@ -77,13 +77,9 @@ export class Dashboard extends Page {
         cardContainer.classList.add("chart-card");
         cardContainer.innerHTML = cardHtml;
         this.bottomCardsContainer.appendChild(cardContainer)
+        this.GenerateChart(cardContainer)
     }
 
-    // TODO: Populate Cards
-
-    // TODO: Generate Quote
-
-    // TODO: Get data
 
     // TODO: Get Input
     CardInput(elementArray, inputElement) {
@@ -92,5 +88,23 @@ export class Dashboard extends Page {
     }
 
     // TODO:  Generate Chart
+    GenerateChart(chartContainer) {
+        const chart = document.createElement("div")
+        chart.classList.add("pie-chart")
+
+        chartContainer.appendChild(chart)
+
+        this.filterData();
+    }
+
+    filterData() {
+        const data = JSON.parse(getLocalStorage("timelineData")) || [];
+
+        const filteredData = data.filter(entry => {
+            const entryDate = new Date("Thu Feb 12 2026 17:14:14 GMT-0500 (Eastern Standard Time)");
+            return new Date(entry.date) > entryDate;
+        })
+        console.log(filteredData)
+    }
 
 }

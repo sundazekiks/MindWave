@@ -162,3 +162,20 @@
     cursor: pointer;
     font-family: var(--heading-2);
 }
+
+ /* Pie Chart*/
+.pie-chart {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin: 20px auto;
+  background: conic-gradient(
+    #ff6384 0% 15%,
+    #36a2eb 15% 25%,
+    #cc65fe 25% 35%,
+    #ffce56 35% 50%,
+    #4bc0c0 50% 70%,
+    #9966ff 70% 85%,
+    #ff9f40 85% 100%
+    );
+}

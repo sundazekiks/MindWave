@@ -1,10 +1,13 @@
 import "./styles/style.css"
 import "./styles/dashboard.css"
 import "./styles/mood.css"
+import "./styles/settings.css"
+
 
 import { footer, header, getParams, setLocalStorage, getLocalStorage } from "./controllers/utils";
 import { Dashboard } from "./modules/dashboard";
 import { Mood } from "./modules/mood";
+import { Settings } from "./modules/settings";
 import { quoteApi } from "./api/quoteApi";
 
 // Date
@@ -67,17 +70,17 @@ else if (get === "mood-history") {
     m.Init()
     m.Timeline()
 }
+else if (get === "settings") {
+    const s = new Settings(app)
+    s.Init()
+
+}
 
 
 
 
+const n = new Date();
 
+n.setDate(n.getDate() + 7);
 
-
-
-
-
-
-
-
-
+console.log(n.toDateString())
