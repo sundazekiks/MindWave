@@ -86,7 +86,7 @@ export class Dashboard extends Page {
         cardContainer.classList.add("chart-card");
         cardContainer.innerHTML = cardHtml;
         this.bottomCardsContainer.appendChild(cardContainer)
-        this.GenerateChart(cardContainer)
+        this.GenerateChart()
     }
 
 
@@ -97,14 +97,21 @@ export class Dashboard extends Page {
     }
 
     // TODO:  Generate Chart
-    GenerateChart(chartContainer) {
+    GenerateChart() {
         // Append the chart element to the card
         const chart = document.createElement("div")
+        const legend = document.createElement("div")
+        legend.classList.add("legend")
         chart.classList.add("pie-chart")
-        chartContainer.appendChild(chart)
+        document.querySelector(".chart").appendChild(chart)
+        document.querySelector(".chart").appendChild(legend)
 
+        // Get the data from local storage and filter it based on the date retracker, then generate the chart based on the filtered data
         const data = this.filtereData();
+
+
         const total = Object.values(data).reduce((acc, val) => acc + val, 0);
+
         const chartSegments = Object.keys(data).map(mood => {
             const value = data[mood];
             const percentage = `${(value / total) * 100}%`;
@@ -123,6 +130,33 @@ export class Dashboard extends Page {
             accumulated = end;  // update accumulated for next segment
             return `${segment.color} ${start}% ${end}%`;
         });
+
+
+
+
+        // Insert the legend items
+        chartSegments.forEach((item) => {
+            const legendItemContainer = document.createElement("div");
+            const legendColor = document.createElement("div");
+            const legendLabel = document.createElement("p");
+            const span = document.createElement("span");
+
+            legendColor.style.backgroundColor = item.color;
+            legendColor.classList.add("legend-color");
+            legendLabel.textContent = `${item.mood.split("")[0].toUpperCase() + item.mood.slice(1)}`;
+            legendLabel.classList.add("legend-label");
+            span.textContent = `${Math.round(parseFloat(item.percentage))}%`;
+            legendLabel.appendChild(span);
+
+            legendItemContainer.appendChild(legendColor);
+            legendItemContainer.appendChild(legendLabel);
+            legendItemContainer.classList.add("legend-item");
+
+            legend.appendChild(legendItemContainer);
+        })
+
+
+
 
 
 

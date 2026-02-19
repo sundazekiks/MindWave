@@ -1,16 +1,22 @@
-const themeOptions = ["Light", "Dark", "System"];
 const notificationOptions = ["On", "Off"];
 const accountOptions = ["Change Password", "Two-Factor Authentication", "Linked Accounts"];
 const privacyOptions = ["Public", "Friends Only", "Private"];
 const aboutOptions = ["Version", "Contact Support", "Terms of Service", "Privacy Policy"];
 
 export const themeOptionElement = () => {
-    const container = document.createElement("select");
+    const container = document.createElement("div");
+    const input = document.createElement("input");
+    const label = document.createElement("p");
+    container.classList.add("theme-option-container");
 
-    const themeOptionTemplate = `
-        ${themeOptions.map(option => `<option value="${option.toLowerCase()}">${option}</option>`).join("")}
-    `
-    container.innerHTML = themeOptionTemplate;
+    input.setAttribute("type", "color");
+    input.setAttribute("id", "theme-color-picker");
+    label.textContent = "Choose Theme Color";
+    label.setAttribute("for", "theme-color-picker");
+
+    container.appendChild(label);
+    container.appendChild(input);
+
     return container;
 
 }

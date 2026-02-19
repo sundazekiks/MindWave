@@ -1,5 +1,6 @@
 import { Page } from "../controllers/page";
 import { themeOptionElement, notificationOptionElement, accountOptionElement, privacyOptionElement, aboutOptionElement } from "../controllers/optionTemps";
+import { setLocalStorage } from "../controllers/utils";
 const settings = ["Theme", "Notifications", "Account", "Privacy", "About"]
 
 export class Settings extends Page {
@@ -37,6 +38,14 @@ export class Settings extends Page {
         document.querySelector(".account").appendChild(accountOptionElement());
         document.querySelector(".privacy").appendChild(privacyOptionElement());
         document.querySelector(".about").appendChild(aboutOptionElement());
+
+        document.getElementById("theme-color-picker").addEventListener("input", (event) => {
+            const selectedColor = event.target.value;
+            document.querySelector(":root").style.setProperty("--bg-custom", selectedColor);
+            setLocalStorage("themeColor", selectedColor)
+        })
+
+
     }
 
 }

@@ -14,7 +14,7 @@
     width: 100%;
     gap: 20px;
     padding: 20px 30px;
-    box-shadow: var(--shadow-custom);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     font-family: var(--heading-1);
     justify-content: space-between;
 }
@@ -32,3 +32,9 @@ select {
         box-shadow: var(--shadow-custom);
         font-family: var(--heading-1);
     }
+
+.theme-option-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}

@@ -12,6 +12,12 @@ import { Mood } from "./modules/mood";
 import { Settings } from "./modules/settings";
 import { quoteApi } from "./api/quoteApi";
 
+// Set theme color from local storage
+const savedThemeColor = getLocalStorage("themeColor");
+if (savedThemeColor) {
+    document.querySelector(":root").style.setProperty("--bg-custom", savedThemeColor);
+}
+
 // Date
 const date = new Date();
 
@@ -20,6 +26,8 @@ const app = document.getElementById("app")
 
 const htmlHeader = await header("/components/header.html")
 const htmlFooter = await footer("/components/footer.html")
+
+
 
 // Load in quote from API and set it to local storage
 // This is to avoid multiple API calls when user goes back and forth between pages
@@ -39,6 +47,9 @@ document.querySelector('#footer').innerHTML = htmlFooter;
         await quoteApi();
     }
 })();
+
+// Full Year
+document.getElementById("date").textContent = new Date().getFullYear();
 
 // Embedding the pages
 const get = getParams();
