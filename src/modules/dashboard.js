@@ -3,6 +3,7 @@ import { card } from "../controllers/inputCard";
 import { chartCard } from "../controllers/chartCard";
 import { Card } from "../controllers/quoteCard";
 import { getLocalStorage } from "../controllers/utils";
+import { dateRetracker } from "../controllers/dateRetracker";
 
 const tempQuotes = `
     Breathe in, breathe out, Let the storm pass through, Even the darkest clouds Can’t hide the sky so blue.
@@ -11,6 +12,14 @@ const tempQuotes = `
     A whisper of hope Can start a roaring flame, Kindness to yourself Is never done in vain.
     Sit with your feelings, Let them flow and be, You are not broken, You are simply free.
 `
+const colors = {
+    "happy": "#63d33a",
+    "sad": "#1E90FF",
+    "angry": "#FF4500",
+    "confused": "#8A2BE2",
+    "smile": "#e7f91e"
+}
+
 export class Dashboard extends Page {
 
     bottomCardsContainer;
@@ -89,12 +98,36 @@ export class Dashboard extends Page {
 
     // TODO:  Generate Chart
     GenerateChart(chartContainer) {
+        // Append the chart element to the card
         const chart = document.createElement("div")
         chart.classList.add("pie-chart")
-
         chartContainer.appendChild(chart)
 
-        this.filterData();
+        const data = this.filtereData();
+        const total = Object.values(data).reduce((acc, val) => acc + val, 0);
+        const chartSegments = Object.keys(data).map(mood => {
+            const value = data[mood];
+            const percentage = `${(value / total) * 100}%`;
+            return {
+                mood,
+                percentage,
+                color: colors[mood]
+            }
+        })
+
+
+        let accumulated = 0;
+        const gradientSegments = chartSegments.map(segment => {
+            const start = accumulated;
+            const end = accumulated + parseFloat(segment.percentage);
+            accumulated = end;  // update accumulated for next segment
+            return `${segment.color} ${start}% ${end}%`;
+        });
+
+
+
+        document.querySelector(".pie-chart").style.background = `conic-gradient(${gradientSegments.join(", ")})`;
+
     }
 
     filterData() {
@@ -102,9 +135,32 @@ export class Dashboard extends Page {
 
         const filteredData = data.filter(entry => {
             const entryDate = new Date("Thu Feb 12 2026 17:14:14 GMT-0500 (Eastern Standard Time)");
-            return new Date(entry.date) > entryDate;
+            return new Date(entry.date) < entryDate;
         })
         console.log(filteredData)
+    }
+
+    // Filter Date for Pie Chart
+    filtereData() {
+        // this is where the date retracker will come in, it will check the date and filter out the data that is not within the week range
+        dateRetracker();
+
+        const freshStartDate = new Date(getLocalStorage("startTracker"));
+        const data = JSON.parse(getLocalStorage("timelineData")) || [];
+
+        const filteredData = data.filter(entry => {
+            const entryDate = new Date(entry.date);
+            return entryDate >= freshStartDate;
+        })
+
+        // A counter for each mood 
+        const moodItemsCount = {}
+
+        filteredData.forEach(entry => {
+            moodItemsCount[entry.mood] = (moodItemsCount[entry.mood] || 0) + 1;
+        })
+
+        return moodItemsCount;
     }
 
 }

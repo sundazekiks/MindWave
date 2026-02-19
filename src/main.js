@@ -4,6 +4,8 @@ import "./styles/mood.css"
 import "./styles/settings.css"
 
 
+
+
 import { footer, header, getParams, setLocalStorage, getLocalStorage } from "./controllers/utils";
 import { Dashboard } from "./modules/dashboard";
 import { Mood } from "./modules/mood";
@@ -22,7 +24,10 @@ const htmlFooter = await footer("/components/footer.html")
 // Load in quote from API and set it to local storage
 // This is to avoid multiple API calls when user goes back and forth between pages
 
-
+// Initialize a start tracker
+if (getLocalStorage("startTracker") === null) {
+    setLocalStorage("startTracker", new Date().toString());
+}
 
 // Injecting the Header Element
 document.querySelector('#header').innerHTML = htmlHeader
@@ -42,6 +47,7 @@ const get = getParams();
 if (get === "dashboard" || get === "redirect to dashboard") {
     const d = new Dashboard(app)
     d.Init()
+    console.log(d.filtereData())
     // TODO: Move this to a better place
     document.getElementById("mood-form").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -79,8 +85,3 @@ else if (get === "settings") {
 
 
 
-const n = new Date();
-
-n.setDate(n.getDate() + 7);
-
-console.log(n.toDateString())
